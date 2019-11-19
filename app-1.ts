@@ -1,3 +1,5 @@
+import { text } from "body-parser";
+
 const { App } = require('@slack/bolt');
 
 const app = new App({
@@ -9,7 +11,18 @@ const app = new App({
 app.message('hello', ({ message, say }) => {
   // say() sends a message to the channel where the event was triggered
   say(`Hey there <@${message.user}>!`);
+  say(send(test));
 });
+
+interface Text {
+  text: string;
+}
+
+function send(text: Text){
+  return text.text;
+}
+
+let test = { text: "this is tes"};
 
 (async () => {
   // Start your app

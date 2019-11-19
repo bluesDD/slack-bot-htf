@@ -11,5 +11,13 @@
   "dependencies": {
     "@slack/bolt": "^1.4.1",
     "typescript": "^3.7.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluesDD/slack-bot-htf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bluesDD/slack-bot-htf/issues"
+  },
+  "homepage": "https://github.com/bluesDD/slack-bot-htf#readme"
 }

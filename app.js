@@ -9,8 +9,12 @@ const app = new App({
 app.message('hello', ({ message, say }) => {
   // say() sends a message to the channel where the event was triggered
   say(`Hey there <@${message.user}>!`);
+  send("test")
 });
 
+function send(text: string){
+  return say(text);
+}
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 2080);
