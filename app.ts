@@ -22,18 +22,23 @@ app.message('test', ({ message, say, context}) :void=> {
 
 app.message(':book:', async ({ message, say}) => {
   say('過去の記事を表示します...')
+  const i=[]
   if (message) {
     try {
       const res = await app.client.conversations.history({
         token: process.env.SLACK_OAUTH_TOKEN,
         channel: message.channel,
-        oldest: 100000,
+        oldest: 10,
+        //cursor: message,
         //ts: message.thread_ts,
         //inclusive: true
       });
       for (const idx in res.messages) {
-        say (`${res.messages[idx].text}`)
+        i.push(res.messages[idx].text)
+
+        //say (`${res.messages[idx].text}`)
       }
+      
     } 
     catch (error) {
       console.error(error);
