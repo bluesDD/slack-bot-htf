@@ -26,8 +26,7 @@ app.message(':book:', async ({ message, say}) => {
       const res = await app.client.conversations.replies({
         token: process.env.SLACK_OAUTH_TOKEN,
         channel: message.channel,
-        ts: message.thread_ts,
-        inclusive: true
+        oldest: 1000,
       });
       for (const idx in res.messages) {
         say (`${res.messages[idx].text}`)
