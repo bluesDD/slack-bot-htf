@@ -1,4 +1,6 @@
-const { App } = require('@slack/bolt');
+const { App, LogLevel } = require('@slack/bolt');
+const util = require('util')
+
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET
@@ -20,21 +22,25 @@ app.message('test', ({ message, say, context}) :void=> {
 
 app.message(':book:', async ({ message, say}) => {
   say('過去の記事を表示します...')
-  //client.conversations.history(option)
-  if (message.thread_ts){
+  if (message) {
     try {
-      const res = await app.client.conversations.replies({
+      const res = await app.client.conversations.history({
         token: process.env.SLACK_OAUTH_TOKEN,
         channel: message.channel,
-        oldest: 1000,
+        oldest: 100000,
+        //ts: message.thread_ts,
+        //inclusive: true
       });
       for (const idx in res.messages) {
         say (`${res.messages[idx].text}`)
       }
+    } 
+    catch (error) {
+      console.error(error);
     }
-    finally {}
+  } else {
+    //say(`${message}`)
   }
-  say(`${message.text}`)
 
 });
 
